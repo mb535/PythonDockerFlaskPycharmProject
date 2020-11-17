@@ -9,4 +9,4 @@ RUN pip install -r requirements.txt
 
 COPY app.py /app
 CMD python app.py
-© 2020 GitHub, Inc.
+
