@@ -18,7 +18,7 @@
     <tbody>
     {% for home in homes %}
     <tr>
-        <td>{{ home.Sell }}</td>
+        <td><a href="view/{{home.id}}">{{ home.Sell }}</a></td>
         <td>{{ home.List }}</td>
         <td>{{ home.Living }}</td>
         <td>{{ home.Rooms }}</td>
