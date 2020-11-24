@@ -2,14 +2,14 @@
 {% block content %}
 
 <div class="card" class="m-5 p-2">
-    <h5 class="card-title">{{ home.Sell}} --- {{ home.List }}</h5>
+    <h5 class="card-title">Selling Price: ${{ home.Sell}}k --- Listing Price: ${{ home.List }}k</h5>
 
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">{{ home.Living }}</li>
-        <li class="list-group-item">{{ home.Rooms }}</li>
-        <li class="list-group-item">{{ home.Beds }}</li>
-        <li class="list-group-item">{{ home.Baths }}</li>
-        <li class="list-group-item">{{ home.Age }}</li>
+        <li class="list-group-item">Living Space:{{ home.Living }}</li>
+        <li class="list-group-item">Number of Rooms:{{ home.Rooms }}</li>
+        <li class="list-group-item">Number of Beds:{{ home.Beds }}</li>
+        <li class="list-group-item">Number of Baths:{{ home.Baths }}</li>
+        <li class="list-group-item">Age:{{ home.Age }}</li>
     </ul>
     <div class="card-body">
         <a href="/edit/{{home.id}}" class="card-link btn btn-primary">edit</a>
