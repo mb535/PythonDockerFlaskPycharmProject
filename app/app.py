@@ -32,6 +32,25 @@ def record_view(home_id):
     result = cursor.fetchall()
     return render_template('view.html', title='View Form', home=result[0])
 
+@app.route('/edit/<int:home_id>', methods=['GET'])
+def form_edit_get(home_id):
+    cursor = mysql.get_db().cursor()
+    cursor.execute('SELECT * FROM homes WHERE id=%s', home_id)
+    result = cursor.fetchall()
+    return render_template('edit.html', title='Edit Form', home=result[0])
+
+@app.route('/edit/<int:home_id>', methods=['POST'])
+def form_update_post(home_id):
+    cursor = mysql.get_db().cursor()
+    inputData = (request.form.get('Sell'), request.form.get('List'), request.form.get('Living'),
+                 request.form.get('Rooms'), request.form.get('Beds'),
+                 request.form.get('Baths'), request.form.get('Age'), home_id)
+    sql_update_query = """UPDATE homes t SET t.Sell = %s, t.List = %s, t.Living = %s, t.Rooms = 
+    %s, t.Beds = %s, t.Baths = %s, t.Age = %s WHERE t.id = %s """
+    cursor.execute(sql_update_query, inputData)
+    mysql.get_db().commit()
+    return redirect("/", code=302)
+
 @app.route('/api/v1/homes', methods=['GET'])
 def api_browse() -> str:
     cursor = mysql.get_db().cursor()

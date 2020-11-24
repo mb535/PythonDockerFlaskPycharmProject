@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+<form action="/edit/{{home.id}}" method="post">
+    <div class="row">
+        <div class="col">
+            <label for="Sell">Selling Price</label>
+            <input id="Sell" type="text" class="form-control" placeholder="Selling Price" name="Sell" value="{{home.Sell}}">
+        </div>
+        <div class="col">
+            <label for="List">Listing Price</label>
+            <input id="List" type="text" class="form-control" placeholder="Listing Price" name="List" value="{{home.List}}">
+        </div>
+        <div class="col">
+            <label for="Living">Living Space</label>
+            <input id="Living" type="text" class="form-control" placeholder="Living Space" name="Living" value="{{home.Living}}">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <label for="Rooms">Number of Rooms</label>
+            <input id="Rooms" type="text" class="form-control" placeholder="Number of Rooms" name="Rooms" value="{{home.Rooms}}">
+        </div>
+        <div class="col">
+            <label for="Beds">Number of Beds</label>
+            <input id="Beds" type="text" class="form-control" placeholder="Number of Beds" name="Beds" value="{{home.Beds}}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="Baths">Number of Baths</label>
+
+            <input id="Baths" type="text" class="form-control" placeholder="Number of Baths" name="Baths" value="{{home.Baths}}">
+        </div>
+        <div class="col">
+            <label for="Age">Age</label>
+            <input id="Age" type="text" class="form-control" placeholder="Age" name="Age" value="{{home.Age}}">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+
+</form>
+{% endblock %}
