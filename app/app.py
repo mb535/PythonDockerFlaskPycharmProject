@@ -51,6 +51,30 @@ def form_update_post(home_id):
     mysql.get_db().commit()
     return redirect("/", code=302)
 
+@app.route('/homes/new', methods=['GET'])
+def form_insert_get():
+    return render_template('new.html', title='New City Form')
+
+
+@app.route('/homes/new', methods=['POST'])
+def form_insert_post():
+    cursor = mysql.get_db().cursor()
+    inputData = (request.form.get('Sell'), request.form.get('List'), request.form.get('Living'),request.form.get('Rooms'),
+                 request.form.get('Beds'), request.form.get('Baths'),
+                 request.form.get('Age'), request.form.get('Acres'),request.form.get('Taxes'))
+    sql_insert_query = """INSERT INTO homes (Sell,List,Living,Rooms,Beds,Baths,Age,Acres,Taxes) VALUES (%s, %s,%s, %s,%s, %s,%s,%s,%s) """
+    cursor.execute(sql_insert_query, inputData)
+    mysql.get_db().commit()
+    return redirect("/", code=302)
+
+@app.route('/delete/<int:home_id>', methods=['POST'])
+def form_delete_post(home_id):
+    cursor = mysql.get_db().cursor()
+    sql_delete_query = """DELETE FROM homes WHERE id = %s """
+    cursor.execute(sql_delete_query, home_id)
+    mysql.get_db().commit()
+    return redirect("/", code=302)
+
 @app.route('/api/v1/homes', methods=['GET'])
 def api_browse() -> str:
     cursor = mysql.get_db().cursor()
