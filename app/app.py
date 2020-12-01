@@ -80,7 +80,7 @@ def api_browse() -> str:
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM homes')
     result = cursor.fetchall()
-    json_result = json.dumps(result)
+    json_result = json.dumps(result);
     resp = Response(json_result, status=200, mimetype='application/json')
     return resp
 
@@ -90,7 +90,7 @@ def api_retrieve(home_id) -> str:
     cursor = mysql.get_db().cursor()
     cursor.execute('SELECT * FROM homes WHERE id=%s', home_id)
     result = cursor.fetchall()
-    json_result = json.dumps(result)
+    json_result = json.dumps(result);
     resp = Response(json_result, status=200, mimetype='application/json')
     return resp
 
@@ -107,10 +107,10 @@ def api_edit(home_id) -> str:
     return resp
 
 
-@app.route('/api/homes/<int:city_id>', methods=['DELETE'])
+@app.route('/api/homes/<int:home_id>', methods=['DELETE'])
 def api_delete(home_id) -> str:
     resp = Response(status=210, mimetype='application/json')
     return resp
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0',debug=True)
