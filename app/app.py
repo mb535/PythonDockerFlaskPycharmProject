@@ -94,15 +94,30 @@ def api_retrieve(home_id) -> str:
     resp = Response(json_result, status=200, mimetype='application/json')
     return resp
 
-
-@app.route('/api/v1/homes/', methods=['POST'])
-def api_add() -> str:
+@app.route('/api/v1/homes/<int:home_id>', methods=['PUT'])
+def api_edit(home_id) -> str:
+    cursor = mysql.get_db().cursor()
+    content = request.json
+    inputData = (content['Sell'], content['List'], content['Living'],
+                 content['Rooms'], content['Beds'],
+                 content['Baths'], content['Age'], content['Acres'], content['Taxes'], home_id)
+    sql_update_query = """UPDATE homes t SET t.Sell = %s, t.List = %s, t.Living = %s, t.Rooms = 
+    %s, t.Beds = %s, t.Baths = %s, t.Age = %s WHERE t.id = %s """
+    cursor.execute(sql_update_query, inputData)
+    mysql.get_db().commit()
     resp = Response(status=201, mimetype='application/json')
     return resp
 
-
-@app.route('/api/v1/homes/<int:home_id>', methods=['PUT'])
-def api_edit(home_id) -> str:
+@app.route('/api/v1/homes/', methods=['POST'])
+def api_add() -> str:
+    content = request.json
+    cursor = mysql.get_db().cursor()
+    inputData = (content['Sell'], content['List'], content['Living'],
+                 content['Rooms'], content['Beds'],
+                 content['Baths'], content['Age'],content['Acres'],request.form.get('Taxes'))
+    sql_insert_query = """INSERT INTO homes (Sell,List,Living,Rooms,Beds,Baths,Age,Acres,Taxes) VALUES (%s, %s,%s, %s,%s, %s,%s,%s,%s) """
+    cursor.execute(sql_insert_query, inputData)
+    mysql.get_db().commit()
     resp = Response(status=201, mimetype='application/json')
     return resp
 
