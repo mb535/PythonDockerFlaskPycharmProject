@@ -105,10 +105,10 @@ def api_edit(home_id) -> str:
     %s, t.Beds = %s, t.Baths = %s, t.Age = %s WHERE t.id = %s """
     cursor.execute(sql_update_query, inputData)
     mysql.get_db().commit()
-    resp = Response(status=201, mimetype='application/json')
+    resp = Response(status=200, mimetype='application/json')
     return resp
 
-@app.route('/api/v1/homes/', methods=['POST'])
+@app.route('/api/v1/homes', methods=['POST'])
 def api_add() -> str:
     content = request.json
     cursor = mysql.get_db().cursor()
@@ -124,7 +124,11 @@ def api_add() -> str:
 
 @app.route('/api/homes/<int:home_id>', methods=['DELETE'])
 def api_delete(home_id) -> str:
-    resp = Response(status=210, mimetype='application/json')
+    cursor = mysql.get_db().cursor()
+    sql_delete_query = """DELETE FROM homes WHERE id = %s """
+    cursor.execute(sql_delete_query, home_id)
+    mysql.get_db().commit()
+    resp = Response(status=200, mimetype='application/json')
     return resp
 
 if __name__ == '__main__':
