@@ -102,7 +102,7 @@ def api_edit(home_id) -> str:
                  content['Rooms'], content['Beds'],
                  content['Baths'], content['Age'], content['Acres'], content['Taxes'], home_id)
     sql_update_query = """UPDATE homes t SET t.Sell = %s, t.List = %s, t.Living = %s, t.Rooms = 
-    %s, t.Beds = %s, t.Baths = %s, t.Age = %s WHERE t.id = %s """
+    %s, t.Beds = %s, t.Baths = %s, t.Age = %s, t.Acres = %s, t.Taxes = %s WHERE t.id = %s """
     cursor.execute(sql_update_query, inputData)
     mysql.get_db().commit()
     resp = Response(status=200, mimetype='application/json')
