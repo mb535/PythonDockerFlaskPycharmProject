@@ -101,8 +101,8 @@ def api_edit(home_id) -> str:
     inputData = (content['Sell'], content['List'], content['Living'],
                  content['Rooms'], content['Beds'],
                  content['Baths'], content['Age'], content['Acres'], content['Taxes'], home_id)
-    sql_update_query = """UPDATE homes t SET t.Sell = %s, t.List = %s, t.Living = %s, t.Rooms = 
-    %s, t.Beds = %s, t.Baths = %s, t.Age = %s, t.Acres = %s, t.Taxes = %s WHERE t.id = %s """
+    sql_update_query = """UPDATE homes t SET t.Sell = %s, t.List = %s, t.Living = %s, t.Rooms = %s, 
+    t.Beds = %s, t.Baths = %s, t.Age = %s, t.Acres = %s, t.Taxes = %s WHERE t.id = %s """
     cursor.execute(sql_update_query, inputData)
     mysql.get_db().commit()
     resp = Response(status=200, mimetype='application/json')
@@ -122,7 +122,7 @@ def api_add() -> str:
     return resp
 
 
-@app.route('/api/homes/<int:home_id>', methods=['DELETE'])
+@app.route('/api/v1/homes/<int:home_id>', methods=['DELETE'])
 def api_delete(home_id) -> str:
     cursor = mysql.get_db().cursor()
     sql_delete_query = """DELETE FROM homes WHERE id = %s """
