@@ -24,8 +24,12 @@
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
+	    googleCalendarApiKey: 'AIzaSyDCBinaS6GULUtM4buGJrWiLz-ILm0Y3CU',
             timeZone: 'local',
             initialView: 'dayGridMonth',
+	    events: {
+            googleCalendarId: 'umch4l3ni7g1ao1rk3sahv1sbc@group.calendar.google.com'
+            },
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
